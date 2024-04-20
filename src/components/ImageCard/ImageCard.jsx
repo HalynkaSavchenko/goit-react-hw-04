@@ -2,13 +2,13 @@ export default function ImageCard({
     alt_description,
     description, 
     likes,
-    small,
+    urls,
     name
 }) {
     return(
         <div>
             <div>
-                <img src={small} alt={alt_description} />
+                <img src={urls} alt={alt_description} />
             </div>
             <div>
                 <ul>

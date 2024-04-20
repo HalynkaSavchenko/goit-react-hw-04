@@ -14,6 +14,8 @@ export default function App() {
     const [error, setError] = useState(false);
     const [page, setPage] = useState(1);
     const [query, setQuery] = useState('');
+    const [modalImage, setModalImage] =([])
+    const [isOpen, setIsOpen] = useState(false)
 
     const handleSearch = (newQuery) => {
         setQuery(newQuery);
@@ -44,9 +46,21 @@ export default function App() {
             setIsLoading(false)
         }
     }
-    getImages();
-}, [page, query]);
+        getImages();
+    }, [page, query]);
 
+    function openModal() {
+        setIsOpen(true)
+    };
+
+    function closeModal() {
+        setIsOpen(false)
+    }
+
+    const handleImageClick = (image) => {
+        setModalImage(image);
+        setIsOpen(true);
+    };
     
 
     
@@ -54,9 +68,14 @@ export default function App() {
         <div>
             <SearchBar onSearch = {handleSearch}/>
             {error && <ErrorMessage/>}
-            {images.length > 0 && <ImageGallery items={images}/>}
+            {images.length > 0 && <ImageGallery items={images} onImageClick={handleImageClick}/>}
             {isLoading && <Loader/>}
             <LoadMoreBtn onClick ={handleLoadMore}/>
+            <ImageModal 
+            onClose={closeModal}
+            onOpen={openModal}
+            state={isOpen}
+            img={modalImage}/>
         </div>
     )
 }
