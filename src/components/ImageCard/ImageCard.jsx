@@ -1,20 +1,28 @@
+import css from './ImageCard.module.css'
 export default function ImageCard({
+    onImageClick,
     alt_description,
     description, 
     likes,
     urls,
-    name
+    name,
+    modalUrls
 }) {
+    const handleClick = () => {
+        const imageData = {
+            modalUrl: modalUrls
+        };
+        onImageClick(imageData);
+    };
     return(
         <div>
-            <div>
+            <div onClick={handleClick}>
                 <img src={urls} alt={alt_description} />
             </div>
             <div>
-                <ul>
-                    <li>Photo title:<span>{description}</span></li>
-                    <li>Author name:<span>{name}</span></li>
-                    <li>Likes:<span>{likes}</span></li>
+                <ul className={css.list}>
+                    <li className={css.item}>Author name: <span>{name}</span></li>
+                    <li className={css.item}>Likes: <span>{likes}</span></li>
                 </ul>
             </div>
         </div>

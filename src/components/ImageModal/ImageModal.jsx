@@ -1,14 +1,26 @@
 import Modal from 'react-modal';
 
 const customStyles = {
-    content: {
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
+  overlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(65, 65, 65, 0.95)'
+  },
+  content: {
+    position: 'absolute',
+    top: '20px',
+    left: '20px',
+    right: '20px',
+    bottom: '20px',
+    outline: 'none',
+    backgroundColor: 'rgba(85, 85, 85, 0.75)',
+    overflow: 'hidden', 
+    maxWidth: '100%',
+    maxHeight: '100%'
+  }
   };
 
   Modal.setAppElement('#root');
@@ -21,7 +33,7 @@ export default function ImageModal({onClose, state, img}) {
          style={customStyles}>
           <button onClick={onClose}>Close</button>
           {img && (
-                <img src={img.urls.regular} alt={img.alt_description} />
+                <img src={img.modalUrl} alt={img.alt_description} />
             )}
 
          </Modal>

@@ -9,29 +9,40 @@ import ImageModal from '../ImageModal/ImageModal';
 
 
 export default function App() {
+    // стани
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
     const [page, setPage] = useState(1);
     const [query, setQuery] = useState('');
-    const [modalImage, setModalImage] =([])
-    const [isOpen, setIsOpen] = useState(false)
+    const [modalImageData, setModalImageData] =useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
 
+    // ф-я пошуку
     const handleSearch = (newQuery) => {
         setQuery(newQuery);
         setPage(1);
         setImages([]);
     };
 
+    // ф-я завант наст сторінки
     const handleLoadMore = () => {
         setPage(page+1)
     };
+
+    // ф-я при кліку для виклику модалки
+    const handleImageClick = (imageData) => {
+        setModalImageData(imageData);
+        setIsOpen(true);}
+
 
     useEffect(() => {
         if (query ==='') {
             return
         }
     
+        // запит
     async function getImages () {
         try {
             setError(false);
@@ -40,6 +51,11 @@ export default function App() {
             setImages((prevImages) => {
                 return [...prevImages, ...data];
             });
+
+            // перевірка кінця колекції, не працює
+            if (page >= data.total_pages) {
+                setHasMore(false);
+            }
         } catch(error) {
             setError(true);
         } finally {
@@ -49,19 +65,12 @@ export default function App() {
         getImages();
     }, [page, query]);
 
-    function openModal() {
-        setIsOpen(true)
+    // ф-я для модалки
+    const handleCloseModal = () => {
+        setIsOpen(false);
+        setModalImageData(null);
     };
 
-    function closeModal() {
-        setIsOpen(false)
-    }
-
-    const handleImageClick = (image) => {
-        setModalImage(image);
-        setIsOpen(true);
-    };
-    
 
     
     return(
@@ -70,12 +79,11 @@ export default function App() {
             {error && <ErrorMessage/>}
             {images.length > 0 && <ImageGallery items={images} onImageClick={handleImageClick}/>}
             {isLoading && <Loader/>}
-            <LoadMoreBtn onClick ={handleLoadMore}/>
+            {images.length > 0 && hasMore && <LoadMoreBtn onClick ={handleLoadMore} hasMore={hasMore}/>}
             <ImageModal 
-            onClose={closeModal}
-            onOpen={openModal}
+            onClose={handleCloseModal}
             state={isOpen}
-            img={modalImage}/>
+            img={modalImageData}/>
         </div>
     )
 }

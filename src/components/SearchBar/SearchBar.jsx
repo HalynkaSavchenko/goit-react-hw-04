@@ -7,7 +7,9 @@ export default function SearchBar({onSearch}) {
             duration: 4000, 
             position: 'top-right',
             style: {
-                backgroundColor: 'yellow'
+                borderRadius: '12px',
+                background: '#3339',
+                color: '#fff',
             },
             icon: '👏'
         })
@@ -22,9 +24,9 @@ export default function SearchBar({onSearch}) {
     }
     return(
         <header>
-            <form onSubmit={handleSubmit}>
-                <input type='text' autoComplete='off' autoFocus placeholder="Search images and photos" name='search'/>
-                <button type='submit'>Search</button>
+            <form className={css.form} onSubmit={handleSubmit}>
+                <input className={css.input} type='text' autoComplete='off' autoFocus placeholder="Search images and photos" name='search'/>
+                <button className={css.btn} type='submit'>Search</button>
                 <Toaster/>
             </form>
         </header>

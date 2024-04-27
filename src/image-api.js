@@ -9,8 +9,9 @@ export const fetchData = async (searchQuery, currentPage) => {
         params: {
             query: searchQuery,
             page: currentPage,
-            per_page: 12,
+            per_page: 8,
             client_id: ACCESS_KEY,
+            orientation: 'landscape',
         }
     });
     
