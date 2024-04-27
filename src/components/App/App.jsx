@@ -51,11 +51,6 @@ export default function App() {
             setImages((prevImages) => {
                 return [...prevImages, ...data];
             });
-
-            // перевірка кінця колекції, не працює
-            if (page >= data.total_pages) {
-                setHasMore(false);
-            }
         } catch(error) {
             setError(true);
         } finally {
@@ -79,7 +74,7 @@ export default function App() {
             {error && <ErrorMessage/>}
             {images.length > 0 && <ImageGallery items={images} onImageClick={handleImageClick}/>}
             {isLoading && <Loader/>}
-            {images.length > 0 && hasMore && <LoadMoreBtn onClick ={handleLoadMore} hasMore={hasMore}/>}
+            {images.length > 0 && <LoadMoreBtn onClick ={handleLoadMore}/>}
             <ImageModal 
             onClose={handleCloseModal}
             state={isOpen}

@@ -1,7 +1,7 @@
 import css from './LoadMoreBtn.module.css'
-export default function LoadMoreBtn({onClick, hasMore}) {
+export default function LoadMoreBtn({onClick}) {
     return(
-        <div className={hasMore ? css.container : css.hidden}>
+        <div className={css.container}>
             <button className={css.btn} onClick={onClick} type="submit">Load more</button>
         </div>
     )
