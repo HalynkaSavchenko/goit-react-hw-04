@@ -17,7 +17,7 @@ export default function App() {
     const [query, setQuery] = useState('');
     const [modalImageData, setModalImageData] =useState([]);
     const [isOpen, setIsOpen] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
+    
 
     // ф-я пошуку
     const handleSearch = (newQuery) => {

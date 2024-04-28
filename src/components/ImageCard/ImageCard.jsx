@@ -2,7 +2,6 @@ import css from './ImageCard.module.css'
 export default function ImageCard({
     onImageClick,
     alt_description,
-    description, 
     likes,
     urls,
     name,
@@ -16,8 +15,8 @@ export default function ImageCard({
     };
     return(
         <div>
-            <div onClick={handleClick}>
-                <img src={urls} alt={alt_description} />
+            <div>
+                <img src={urls} alt={alt_description} onClick={handleClick} />
             </div>
             <div>
                 <ul className={css.list}>
