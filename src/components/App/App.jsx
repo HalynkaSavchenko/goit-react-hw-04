@@ -17,6 +17,7 @@ export default function App() {
     const [query, setQuery] = useState('');
     const [modalImageData, setModalImageData] =useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [showBtn, setShowBtn] = useState(false);
     
 
     // ф-я пошуку
@@ -48,6 +49,8 @@ export default function App() {
             setError(false);
             setIsLoading(true);
             const data = await fetchData(query, page);
+            const totalPages = data.total_pages;
+            setShowBtn (totalPages !== page)
             setImages((prevImages) => {
                 return [...prevImages, ...data];
             });
@@ -74,7 +77,7 @@ export default function App() {
             {error && <ErrorMessage/>}
             {images.length > 0 && <ImageGallery items={images} onImageClick={handleImageClick}/>}
             {isLoading && <Loader/>}
-            {images.length > 0 && <LoadMoreBtn onClick ={handleLoadMore}/>}
+            {images.length > 0 && showBtn &&<LoadMoreBtn onClick ={handleLoadMore}/>}
             <ImageModal 
             onClose={handleCloseModal}
             state={isOpen}
