@@ -50,7 +50,7 @@ export default function App() {
             setIsLoading(true);
             const data = await fetchData(query, page);
             const totalPages = data.total_pages;
-            setShowBtn (totalPages !== page)
+            setShowBtn (totalPages && totalPages !== page);
             setImages((prevImages) => {
                 return [...prevImages, ...data];
             });
@@ -77,7 +77,7 @@ export default function App() {
             {error && <ErrorMessage/>}
             {images.length > 0 && <ImageGallery items={images} onImageClick={handleImageClick}/>}
             {isLoading && <Loader/>}
-            {images.length > 0 && showBtn &&<LoadMoreBtn onClick ={handleLoadMore}/>}
+            {showBtn && <LoadMoreBtn onClick ={handleLoadMore}/>}
             <ImageModal 
             onClose={handleCloseModal}
             state={isOpen}
