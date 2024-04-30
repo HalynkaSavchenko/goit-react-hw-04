@@ -52,7 +52,7 @@ export default function App() {
             const totalPages = data.total_pages;
             setShowBtn (totalPages && totalPages !== page);
             setImages((prevImages) => {
-                return [...prevImages, ...data];
+                return [...prevImages, ...data.results];
             });
         } catch(error) {
             setError(true);

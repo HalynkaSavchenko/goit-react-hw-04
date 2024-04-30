@@ -15,5 +15,5 @@ export const fetchData = async (searchQuery, currentPage) => {
         }
     });
     
-    return response.data.results
+    return response.data
 }
